@@ -1,0 +1,4 @@
+{
+  "SECRET_API_KEY": "thisismysecretkey",
+  "ANOTHER_API_KEY": "anotherkey"
+}
