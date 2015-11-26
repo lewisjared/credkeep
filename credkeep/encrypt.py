@@ -19,4 +19,6 @@ def encrypt_file(filename, output_filename=None, key=default_keyname):
 
     if output_filename:
         json.dump(results, open(output_filename, 'w'), indent=2)
+    else:
+        print json.dumps(results, indent=2)
     return results

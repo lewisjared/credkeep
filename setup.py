@@ -24,5 +24,9 @@ setup(
     ],
     keywords='kms credentials storage encrypt decrypt',
     install_requires=['boto3>=1.1.1'],
+    entry_points={
+        'console_scripts':
+            ['credkeep = credkeep.cli:main']
+    },
     packages=find_packages(exclude='tests')
 )
