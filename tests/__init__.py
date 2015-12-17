@@ -3,8 +3,14 @@ from os.path import exists
 from os import remove
 from json import dump
 
-decrypted_file = 'data/test.json'
-encrypted_file = 'data/test_encrypted.json'
+decrypted_secrets = {
+    "SECRET_API_KEY": "thisismysecretkey",
+    "ANOTHER_API_KEY": "anotherkey"
+}
+encrypted_secrets = {
+    "SECRET_API_KEY": "CiAr4gKwrApZNibuqh1YKjlIGMj4A4GSHArF+0lCqBnqOxKfAQEBAgB4K+ICsKwKWTYm7qodWCo5SBjI+AOBkhwKxftJQqgZ6jsAAAB2MHQGCSqGSIb3DQEHBqBnMGUCAQAwYAYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAzGyPmdgqEbxzvnjKICARCAMzOd+DIaI/rUbc8dYQTxGS8aQQNjgXPt6Or0rxo7fFn0rA5/Kf6zpnui0q9XXtUatL4D3Q==",
+    "ANOTHER_API_KEY": "CiAr4gKwrApZNibuqh1YKjlIGMj4A4GSHArF+0lCqBnqOxKXAQEBAgB4K+ICsKwKWTYm7qodWCo5SBjI+AOBkhwKxftJQqgZ6jsAAABuMGwGCSqGSIb3DQEHBqBfMF0CAQAwWAYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAxgB3p/zbVarLd/5a4CARCAK4w48/dCK7EvwTDELb11bpBe8TpaIhcCalfOqACQzoLoqgciAY8DuczOvRs="
+}
 
 
 class CredkeepTestCase(TestCase):

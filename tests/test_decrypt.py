@@ -1,14 +1,25 @@
-import unittest
 import credkeep
-import json
-from . import decrypted_file, encrypted_file
+import mock
+from . import encrypted_secrets, decrypted_secrets, CredkeepTestCase
 
 
-# Warning this test class makes actual API calls to the KMS service. Therefore ensure that an boto is configured correctly
-class TestEncrypt(unittest.TestCase):
-    def test_encrypt(self):
-        results = credkeep.decrypt_file(encrypted_file, set_env=False)
+def mock_decrypt(secret):
+    values = {}
+    for k in encrypted_secrets:
+        values[encrypted_secrets[k]] = decrypted_secrets[k]
 
-        orig = json.load(open(decrypted_file))
+    return values[secret]
 
-        self.assertDictEqual(orig, results)
+
+class TestDecrypt(CredkeepTestCase):
+    def setUp(self):
+        super(TestDecrypt, self).setUp()
+        self.enc_fname = 'test.enc.json'
+        self.create_temp(self.enc_fname, encrypted_secrets)
+
+    @mock.patch('credkeep.decrypt.decrypt_secret')
+    def test_decrypt(self, mock_decrypt_secret):
+        mock_decrypt_secret.side_effect = mock_decrypt
+
+        results = credkeep.decrypt_file(self.enc_fname, set_env=False)
+        self.assertDictEqual(results, decrypted_secrets)
